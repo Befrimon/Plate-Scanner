@@ -24,7 +24,9 @@ source .venv/bin/activate
 
 Install required dependencies
 
-`python -m pip install -r requirements.txt`
+```
+python -m pip install -r requirements.txt
+```
 
 ### Run
 Build and run the application using buildozer. The first build may take a long time
