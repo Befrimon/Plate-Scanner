@@ -1,0 +1,80 @@
+<MainScreen>:
+    orientation: 'vertical'
+	plate_reader: self.ids.camera
+	result_text: self.ids.decode
+
+	PlateReader:
+		canvas.after:
+			Color:
+				rgba: 0, 0, 0, .7
+			Rectangle:
+				pos: self.pos
+				size: (self.width, .5*self.height)
+			Rectangle:
+				pos: (0, .8*self.height)
+				size: (self.width, .2*self.height)
+			Rectangle:
+				pos: (0, .5*self.height)
+				size: (self.width/2 - .15*self.height, .3*self.height)
+			Rectangle:
+				pos: (self.width/2 + .15*self.height, .5*self.height)
+				size: (self.width/2 - .15*self.height, .3*self.height)
+
+		id: camera
+		aspect_ratio: '16:9'
+
+	Label:
+		id: decode
+		text: "Decode here!"
+		font_size: '20sp'
+
+		size_hint: (1, .1)
+		pos_hint: {'x': 0, 'y': .9}
+	
+	Image:
+		id: debug_img
+		
+		size_hint: (.3*root.height/root.width, .3)
+		pos_hint: {'x': (root.width-self.width)/2 / root.width, 'y': .18}
+	
+	ButtonBox:
+		id: buttons
+
+		size_hint: (1, .15)
+		pos_hint: {'x': 0, 'y': 0}
+
+<ButtonBox>:
+	canvas.before:
+        Color:
+            rgba: 0, 0, 0, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+	ToggleButton:
+		on_press: root.debug_switch(self.state)
+		background_normal: 'images/debug.png'
+		background_down: 'images/debug.png'
+
+		size_hint: (None, .4)
+		width: self.height
+		pos_hint: {'x': .1, 'y': .3}
+
+	Button:
+		on_press: root.capture_photo()
+		background_normal: 'images/capture.png'
+		background_down: 'images/capture.png'
+
+		size_hint: (None, .7)
+		width: self.height
+		pos_hint: {'x': (root.width - self.width)/2 / root.width, 'y': .15}
+
+	ToggleButton:
+		on_press: root.switch_flashlight(self.state)
+		background_normal: 'images/flash-off.png'
+		background_down: 'images/flash-on.png'
+
+		size_hint: (None, .4)
+		width: self.height
+		pos_hint: {'x': (.9*root.width - self.width) / root.width, 'y': .3}
+	
